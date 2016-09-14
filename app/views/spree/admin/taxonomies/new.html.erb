@@ -1,0 +1,21 @@
+<% admin_breadcrumb(link_to (Spree::Product), spree.admin_products_path) %>
+<% admin_breadcrumb(link_to (Spree::Category).to_s.pluralize, spree.admin_taxonomies_path) %>
+<% admin_breadcrumb(Spree.t(:new_category)) %>
+
+
+<% content_for :page_actions do %>
+    <li>
+      <%= button_link_to Spree.t(:back_to_category_list), spree.admin_categories_path, :id => 'admin_categories_link', :class => 'fa fa-arrow-left' %>
+    </li>
+<% end %>
+
+<%= form_for [:admin, @taxonomy] do |f| %>
+
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <fieldset class="no-border-top">
+    <br>
+    <div class="filter-actions actions" data-hook="buttons">
+      <%= button Spree.t('actions.create') %>
+    </div>
+  </fieldset>
+<% end %>

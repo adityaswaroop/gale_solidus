@@ -1,0 +1,22 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Product), spree.admin_products_path) %>
+<% admin_breadcrumb(plural_resource_name(Spree::Category).pluralize) %>
+
+<% content_for :page_actions do %>
+    <% if can?(:create, Spree::Category) %>
+        <li>
+          <%= button_link_to Spree.t(:new_category), spree.new_admin_category_url, :id => 'admin_new_category_link', :class => 'fa fa-plus' %>
+        </li>
+    <% end %>
+<% end %>
+
+<% if @taxonomies.any? %>
+    <div id="list-taxonomies" data-hook>
+      <%= render 'list' %>
+    </div>
+<% else %>
+    <div class="alpha twelve columns no-objects-found">
+      <%= render 'spree/admin/shared/no_objects_found',
+                 resource: Spree::Category,
+                 new_resource_url: new_object_url %>
+    </div>
+<% end %>

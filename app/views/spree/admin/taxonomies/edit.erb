@@ -1,0 +1,33 @@
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Product), spree.admin_products_path) %>
+<% admin_breadcrumb(link_to plural_resource_name(Spree::Category), spree.admin_categories_path) %>
+<% admin_breadcrumb(Spree.t(:edit_category)) %>
+
+
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to Spree.t(:back_to_category_list), spree.admin_categories_path, :id => 'admin_categories_link', :class => 'fa fa-arrow-left' %>
+  </li>
+  <li>
+    <%= button_link_to Spree.t(:add_catalog), spree.admin_categories_path, { class: 'add-taxon-button fa fa-plus' } %>
+  </li>
+<% end %>
+
+<%= form_for [:admin, @taxonomy] do |f| %>
+  <fieldset class="no-border-top">
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <div class="filter-actions actions">
+      <%= button Spree.t('actions.update') %>
+      <%= button_link_to Spree.t('actions.cancel'), admin_categories_path %>
+    </div>
+  </fieldset>
+
+
+  <div>
+    <script>
+      Spree.routes.taxonomy_path = "<%= spree.api_category_path(@taxonomy) %>";
+      Spree.routes.taxonomy_taxons_path = "<%= spree.api_category_catalogs_path(@taxonomy) %>";
+      Spree.routes.admin_taxonomy_taxons_path = "<%= spree.admin_category_catalogs_path(@taxonomy) %>";
+    </script>
+    <div id="taxonomy_tree" class="tree" data-taxonomy-id="<%= @taxonomy.id %>"></div>
+  </div>
+<% end %>

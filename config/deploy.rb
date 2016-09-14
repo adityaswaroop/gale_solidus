@@ -1,14 +1,12 @@
-require 'rvm/capistrano'
-require 'bundler/capistrano'
+# config valid only for current version of Capistrano
+lock '3.6.1'
 
-set :rvm_autolibs_flag, 'read-only'
-
-set :repository, 'git@github.com:adityaswaroop/gale_solidus.git'
+set :application, 'gale_solidus'
+set :repo_url, 'git@github.com:adityaswaroop/gale_solidus.git'
 set :scm, :git
 set :branch, 'master'
 
-set :application, "gale_solidus"
-# set :deploy_via, :remote_cache
+
 set :normalize_asset_timestamps, false
 set :user, 'ubuntu'
 
@@ -17,11 +15,6 @@ set :ec2_server, 'ec2-52-66-121-241.ap-south-1.compute.amazonaws.com'
 ssh_options[:keys] = '~/.ssh/aditya_pmkey.pem'
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
-
-set :rbenv_map_bins, %w{rake gem bundle ruby rails}
-
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
 role :web,  ec2_server                      # Your HTTP server, Apache/etc
 role :app,  ec2_server                         # This may be the same as your `Web` server
@@ -82,18 +75,33 @@ after :deploy, 'deploy:migrate', 'capistrano_log:deploy'
 after 'deploy:rollback', 'capistrano_log:deploy:rollback'
 after 'deploy:update_code', 'deploy:remove_sensitive_files'
 
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
+# Default deploy_to directory is /var/www/my_app_name
+# set :deploy_to, '/var/www/my_app_name'
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+# Default value for :scm is :git
+# set :scm, :git
 
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
+
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: 'log/capistrano.log', color: :auto, truncate: :auto
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+# append :linked_files, 'config/database.yml', 'config/secrets.yml'
+
+# Default value for linked_dirs is []
+# append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910090754) do
+ActiveRecord::Schema.define(version: 20160914185810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1015,6 +1015,17 @@ ActiveRecord::Schema.define(version: 20160910090754) do
 
   add_index "spree_stores", ["code"], name: "index_spree_stores_on_code", using: :btree
   add_index "spree_stores", ["default"], name: "index_spree_stores_on_default", using: :btree
+
+  create_table "spree_sub_properties", force: :cascade do |t|
+    t.integer  "property_id",             null: false
+    t.integer  "parent_id"
+    t.integer  "position",    default: 0
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "spree_sub_properties", ["property_id"], name: "index_spree_sub_properties_on_property_id", using: :btree
 
   create_table "spree_tax_categories", force: :cascade do |t|
     t.string   "name"

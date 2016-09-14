@@ -31,6 +31,9 @@ en:
     choose_a_catalog_to_sort_products_for: 'Choose a Catalog to sort Product for'
     back_to_categories_list: 'Back to Categories List'
     catelog_edit: 'Edit Catalog'
+    edit_property: 'Edit Property'
+    back_to_properties_list: 'Back to Properties List'
+    add_sub_property: 'Add Sub Property'
 
     admin:
       tab:

@@ -1,5 +1,5 @@
-require 'bundler/capistrano'
 require 'rvm/capistrano'
+require 'bundler/capistrano'
 
 set :rvm_autolibs_flag, 'read-only'
 
@@ -17,6 +17,8 @@ set :ec2_server, 'ec2-52-66-121-241.ap-south-1.compute.amazonaws.com'
 ssh_options[:keys] = '~/.ssh/aditya_pmkey.pem'
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
+
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`

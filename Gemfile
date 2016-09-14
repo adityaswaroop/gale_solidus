@@ -25,9 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'solidus'
 gem 'solidus_auth_devise'
-gem 'capistrano', '2.15.5'
-gem 'rvm-capistrano', '1.5.1', :require => false
+gem 'capistrano'
+gem 'rvm-capistrano'
 gem 'passenger', '4.0.53'
+gem 'capistrano-bundler', '~> 1.1.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

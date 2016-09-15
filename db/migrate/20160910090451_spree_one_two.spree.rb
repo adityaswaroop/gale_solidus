@@ -273,26 +273,6 @@ class SpreeOneTwo < ActiveRecord::Migration
     add_index :spree_products, [:name],         name: 'index_spree_products_on_name'
     add_index :spree_products, [:permalink],    name: 'index_spree_products_on_permalink'
 
-    create_table :spree_taxons do |t|
-      t.references :parent
-      t.integer    :position, default: 0
-      t.string     :name, null: false
-      t.string     :permalink
-      t.references :taxonomy
-      t.integer    :lft
-      t.integer    :rgt
-      t.string     :icon_file_name
-      t.string     :icon_content_type
-      t.integer    :icon_file_size
-      t.datetime   :icon_updated_at
-      t.text       :description
-      t.timestamps null: true
-    end
-
-    add_index :spree_taxons, [:parent_id],   name: 'index_taxons_on_parent_id'
-    add_index :spree_taxons, [:permalink],   name: 'index_taxons_on_permalink'
-    add_index :spree_taxons, [:taxonomy_id], name: 'index_taxons_on_taxonomy_id'
-
     create_table :spree_products_taxons, id: false do |t|
       t.references :product
       t.references :taxon

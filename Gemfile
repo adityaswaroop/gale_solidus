@@ -29,6 +29,7 @@ gem 'capistrano'
 gem 'rvm-capistrano'
 gem 'passenger', '4.0.53'
 gem 'capistrano-bundler', '~> 1.1.2'
+gem "net-ssh", "~> 2.7.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

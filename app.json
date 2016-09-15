@@ -1,0 +1,15 @@
+{
+  "name": "gale_solidus",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ]
+}

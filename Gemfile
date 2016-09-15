@@ -25,7 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'solidus'
 gem 'solidus_auth_devise'
-gem 'capistrano'
+gem 'capistrano', '~> 3.4.1'
+gem 'capistrano-rails', '~> 1.1'
 gem 'rvm-capistrano'
 gem 'passenger', '4.0.53'
 gem 'capistrano-bundler', '~> 1.1.2'

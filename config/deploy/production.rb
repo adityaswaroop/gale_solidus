@@ -4,8 +4,8 @@
 # You can define all roles on a single server, or split them:
 
 server 'ec2-52-66-121-241.ap-south-1.compute.amazonaws.com', user: 'ubuntu', roles: %w{app db web}, my_property: :my_value
-# server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
-# server 'db.example.com', user: 'deploy', roles: %w{db}
+server 'ec2-52-66-121-241.ap-south-1.compute.amazonaws.com', user: 'ubuntu', roles: %w{app web}, other_property: :other_value
+server 'ec2-52-66-121-241.ap-south-1.compute.amazonaws.com', user: 'ubuntu', roles: %w{db}
 
 
 
@@ -43,10 +43,10 @@ role :db,  %w{ec2-52-66-121-241.ap-south-1.compute.amazonaws.com}
 
 # --------------
 set :ssh_options, {
-   keys: %w(~/.ssh/aditya_pmkey.pem),
-   forward_agent: false,
-   config: false
-}
+                    keys: %w(~/.ssh/aditya_pmkey.pem),
+                    forward_agent: false,
+                    config: false
+                }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------

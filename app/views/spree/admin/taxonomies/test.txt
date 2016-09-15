@@ -1,5 +1,3 @@
- spree      /           Spree::Core::Engine
-
 Routes for Spree::Core::Engine:
                           update_positions_admin_categories POST   /admin/categories/update_positions(.:format)                                        spree/admin/taxonomies#update_positions
                                     admin_category_catalogs GET    /admin/categories/:category_id/catalogs(.:format)                                   spree/admin/taxons#index
@@ -21,6 +19,27 @@ Routes for Spree::Core::Engine:
                                       search_admin_catalogs GET    /admin/catalogs/search(.:format)                                                    spree/admin/taxons#search
                                              admin_catalogs GET    /admin/catalogs(.:format)                                                           spree/admin/taxons#index
                                               admin_catalog GET    /admin/catalogs/:id(.:format)                                                       spree/admin/taxons#show
+                                  filtered_admin_properties GET    /admin/properties/filtered(.:format)                                                spree/admin/properties#filtered
+                          update_positions_admin_properties POST   /admin/properties/update_positions(.:format)                                        spree/admin/properties#update_positions
+                              admin_property_sub_properties GET    /admin/properties/:property_id/sub_properties(.:format)                             spree/admin/sub_properties#index
+                                                            POST   /admin/properties/:property_id/sub_properties(.:format)                             spree/admin/sub_properties#create
+                            new_admin_property_sub_property GET    /admin/properties/:property_id/sub_properties/new(.:format)                         spree/admin/sub_properties#new
+                           edit_admin_property_sub_property GET    /admin/properties/:property_id/sub_properties/:id/edit(.:format)                    spree/admin/sub_properties#edit
+                                admin_property_sub_property GET    /admin/properties/:property_id/sub_properties/:id(.:format)                         spree/admin/sub_properties#show
+                                                            PATCH  /admin/properties/:property_id/sub_properties/:id(.:format)                         spree/admin/sub_properties#update
+                                                            PUT    /admin/properties/:property_id/sub_properties/:id(.:format)                         spree/admin/sub_properties#update
+                                                            DELETE /admin/properties/:property_id/sub_properties/:id(.:format)                         spree/admin/sub_properties#destroy
+                                           admin_properties GET    /admin/properties(.:format)                                                         spree/admin/properties#index
+                                                            POST   /admin/properties(.:format)                                                         spree/admin/properties#create
+                                         new_admin_property GET    /admin/properties/new(.:format)                                                     spree/admin/properties#new
+                                        edit_admin_property GET    /admin/properties/:id/edit(.:format)                                                spree/admin/properties#edit
+                                             admin_property GET    /admin/properties/:id(.:format)                                                     spree/admin/properties#show
+                                                            PATCH  /admin/properties/:id(.:format)                                                     spree/admin/properties#update
+                                                            PUT    /admin/properties/:id(.:format)                                                     spree/admin/properties#update
+                                                            DELETE /admin/properties/:id(.:format)                                                     spree/admin/properties#destroy
+                                search_admin_sub_properties GET    /admin/sub_properties/search(.:format)                                              spree/admin/sub_properties#search
+                                       admin_sub_properties GET    /admin/sub_properties(.:format)                                                     spree/admin/sub_properties#index
+                                         admin_sub_property GET    /admin/sub_properties/:id(.:format)                                                 spree/admin/sub_properties#show
                                         jstree_api_category GET    /api/categories/:id/jstree(.:format)                                                spree/api/taxonomies#jstree
                                 jstree_api_category_catalog GET    /api/categories/:category_id/catalogs/:id/jstree(.:format)                          spree/api/taxons#jstree
                                       api_category_catalogs GET    /api/categories/:category_id/catalogs(.:format)                                     spree/api/taxons#index
@@ -39,6 +58,24 @@ Routes for Spree::Core::Engine:
                                                             PATCH  /api/categories/:id(.:format)                                                       spree/api/taxonomies#update
                                                             PUT    /api/categories/:id(.:format)                                                       spree/api/taxonomies#update
                                                             DELETE /api/categories/:id(.:format)                                                       spree/api/taxonomies#destroy
+                                        jstree_api_property GET    /api/properties/:id/jstree(.:format)                                                spree/api/properties#jstree
+                           jstree_api_property_sub_property GET    /api/properties/:property_id/sub_properties/:id/jstree(.:format)                    spree/api/sub_properties#jstree
+                                api_property_sub_properties GET    /api/properties/:property_id/sub_properties(.:format)                               spree/api/sub_properties#index
+                                                            POST   /api/properties/:property_id/sub_properties(.:format)                               spree/api/sub_properties#create
+                              new_api_property_sub_property GET    /api/properties/:property_id/sub_properties/new(.:format)                           spree/api/sub_properties#new
+                             edit_api_property_sub_property GET    /api/properties/:property_id/sub_properties/:id/edit(.:format)                      spree/api/sub_properties#edit
+                                  api_property_sub_property GET    /api/properties/:property_id/sub_properties/:id(.:format)                           spree/api/sub_properties#show
+                                                            PATCH  /api/properties/:property_id/sub_properties/:id(.:format)                           spree/api/sub_properties#update
+                                                            PUT    /api/properties/:property_id/sub_properties/:id(.:format)                           spree/api/sub_properties#update
+                                                            DELETE /api/properties/:property_id/sub_properties/:id(.:format)                           spree/api/sub_properties#destroy
+                                             api_properties GET    /api/properties(.:format)                                                           spree/api/properties#index
+                                                            POST   /api/properties(.:format)                                                           spree/api/properties#create
+                                           new_api_property GET    /api/properties/new(.:format)                                                       spree/api/properties#new
+                                          edit_api_property GET    /api/properties/:id/edit(.:format)                                                  spree/api/properties#edit
+                                               api_property GET    /api/properties/:id(.:format)                                                       spree/api/properties#show
+                                                            PATCH  /api/properties/:id(.:format)                                                       spree/api/properties#update
+                                                            PUT    /api/properties/:id(.:format)                                                       spree/api/properties#update
+                                                            DELETE /api/properties/:id(.:format)                                                       spree/api/properties#destroy
                                      new_spree_user_session GET    /user/spree_user/sign_in(.:format)                                                  spree/user_sessions#new
                                          spree_user_session POST   /user/spree_user/sign_in(.:format)                                                  spree/user_sessions#create
                                  destroy_spree_user_session GET    /user/spree_user/logout(.:format)                                                   spree/user_sessions#destroy
@@ -242,12 +279,12 @@ update_positions_admin_product_variant_property_rule_values POST   /admin/produc
                                                             PUT    /admin/option_types/:id(.:format)                                                   spree/admin/option_types#update
                                                             DELETE /admin/option_types/:id(.:format)                                                   spree/admin/option_types#destroy
                                          admin_option_value DELETE /admin/option_values/:id(.:format)                                                  spree/admin/option_values#destroy
-                                  filtered_admin_properties GET    /admin/properties/filtered(.:format)                                                spree/admin/properties#filtered
-                                           admin_properties GET    /admin/properties(.:format)                                                         spree/admin/properties#index
+                                                            GET    /admin/properties/filtered(.:format)                                                spree/admin/properties#filtered
+                                                            GET    /admin/properties(.:format)                                                         spree/admin/properties#index
                                                             POST   /admin/properties(.:format)                                                         spree/admin/properties#create
-                                         new_admin_property GET    /admin/properties/new(.:format)                                                     spree/admin/properties#new
-                                        edit_admin_property GET    /admin/properties/:id/edit(.:format)                                                spree/admin/properties#edit
-                                             admin_property GET    /admin/properties/:id(.:format)                                                     spree/admin/properties#show
+                                                            GET    /admin/properties/new(.:format)                                                     spree/admin/properties#new
+                                                            GET    /admin/properties/:id/edit(.:format)                                                spree/admin/properties#edit
+                                                            GET    /admin/properties/:id(.:format)                                                     spree/admin/properties#show
                                                             PATCH  /admin/properties/:id(.:format)                                                     spree/admin/properties#update
                                                             PUT    /admin/properties/:id(.:format)                                                     spree/admin/properties#update
                                                             DELETE /admin/properties/:id(.:format)                                                     spree/admin/properties#destroy
@@ -718,11 +755,11 @@ update_positions_admin_product_variant_property_rule_values POST   /admin/produc
                                                             DELETE /api/users/:id(.:format)                                                            spree/api/users#destroy {:format=>"json"}
                                             api_credit_card PATCH  /api/credit_cards/:id(.:format)                                                     spree/api/credit_cards#update {:format=>"json"}
                                                             PUT    /api/credit_cards/:id(.:format)                                                     spree/api/credit_cards#update {:format=>"json"}
-                                             api_properties GET    /api/properties(.:format)                                                           spree/api/properties#index {:format=>"json"}
+                                                            GET    /api/properties(.:format)                                                           spree/api/properties#index {:format=>"json"}
                                                             POST   /api/properties(.:format)                                                           spree/api/properties#create {:format=>"json"}
-                                           new_api_property GET    /api/properties/new(.:format)                                                       spree/api/properties#new {:format=>"json"}
-                                          edit_api_property GET    /api/properties/:id/edit(.:format)                                                  spree/api/properties#edit {:format=>"json"}
-                                               api_property GET    /api/properties/:id(.:format)                                                       spree/api/properties#show {:format=>"json"}
+                                                            GET    /api/properties/new(.:format)                                                       spree/api/properties#new {:format=>"json"}
+                                                            GET    /api/properties/:id/edit(.:format)                                                  spree/api/properties#edit {:format=>"json"}
+                                                            GET    /api/properties/:id(.:format)                                                       spree/api/properties#show {:format=>"json"}
                                                             PATCH  /api/properties/:id(.:format)                                                       spree/api/properties#update {:format=>"json"}
                                                             PUT    /api/properties/:id(.:format)                                                       spree/api/properties#update {:format=>"json"}
                                                             DELETE /api/properties/:id(.:format)                                                       spree/api/properties#destroy {:format=>"json"}

@@ -35,7 +35,17 @@ en:
     back_to_properties_list: 'Back to Properties List'
     add_sub_property: 'Add Sub Property'
 
+    api:
+      invalid_property_id: 'Invalid Property ID'
+
+    translations:
+      find_a_taxon: 'Find a Catalog'
+
     admin:
       tab:
         categories: 'Categories'
         catalogs: 'Catalogs'
+
+    errors:
+      messages:
+        could_not_create_sub_property: 'Could not Created Sub Property'

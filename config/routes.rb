@@ -20,6 +20,20 @@ Rails.application.routes.draw do
           get :search
         end
       end
+
+      resources :properties do
+        collection do
+          get :filtered
+          post :update_positions
+        end
+        resources :sub_properties
+      end
+
+      resources :sub_properties, only: [:index, :show] do
+        collection do
+          get :search
+        end
+      end
     end
 
     namespace :api do
@@ -28,6 +42,17 @@ Rails.application.routes.draw do
           get :jstree
         end
         resources :taxons, :as => :catalogs, path: :catalogs do
+          member do
+            get :jstree
+          end
+        end
+      end
+
+      resources :properties do
+        member do
+          get :jstree
+        end
+        resources :sub_properties do
           member do
             get :jstree
           end

@@ -1,0 +1,16 @@
+{{#each sub_properties}}
+  <li data-sub-property-id="{{id}}" data-sub-property-property-id="{{property_id}}">
+    <div  class="sortable-handle">
+      {{#if (isRootSubProperty) }}{{else}}<i class="fa fa-arrows"></i>{{/if}}
+      {{name}}
+      <div class="actions right">
+        <a href="#" class="js-sub-property-add-child fa fa-plus icon_link no-text"></a>
+        <a href="{{admin_url}}/properties/{{property_id}}/sub_properties/{{id}}/edit" class="fa fa-edit icon_link no-text"></a>
+        <a href="#" class="js-sub-property-delete fa fa-trash icon_link no-text"></a>
+      </div>
+    </div>
+    <ul>
+      {{> sub_properties/_propertytree }}
+    </ul>
+  </li>
+{{/each}}

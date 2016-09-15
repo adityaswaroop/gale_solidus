@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914185810) do
+ActiveRecord::Schema.define(version: 20160915184540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -589,9 +589,10 @@ ActiveRecord::Schema.define(version: 20160914185810) do
 
   create_table "spree_properties", force: :cascade do |t|
     t.string   "name"
-    t.string   "presentation", null: false
+    t.string   "presentation",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position",     default: 0
   end
 
   create_table "spree_property_prototypes", force: :cascade do |t|
@@ -1023,6 +1024,8 @@ ActiveRecord::Schema.define(version: 20160914185810) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "lft"
+    t.integer  "rgt"
   end
 
   add_index "spree_sub_properties", ["property_id"], name: "index_spree_sub_properties_on_property_id", using: :btree

@@ -19,4 +19,184 @@
     <%= render :partial => 'form', :locals => { :f => f } %>
     <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
   </fieldset>
+
+    <div>
+      <script>
+          Spree.routes.property_path = "<%= spree.api_property_path(@property) %>";
+          Spree.routes.property_sub_properties_path = "<%= spree.api_property_sub_properties_path(@property) %>";
+          Spree.routes.admin_property_sub_properties_path = "<%= spree.admin_property_sub_properties_path(@property) %>";
+
+          (function() {
+              var create_sub_property, delete_sub_property, draw_tree, get_create_handler, get_property, handle_add_child, handle_delete, handle_move, highlight_sort_targets, redraw_tree, resize_placeholder, restore_sort_targets, setup_property_tree, update_sub_property;
+
+              Handlebars.registerHelper('isRootSubProperty', function() {
+                  return this.parent_id == null;
+              });
+
+              get_property = function() {
+                  return Spree.ajax({
+                      url: Spree.routes.property_path + "?set=nested"
+                  });
+              };
+
+              create_sub_property = function(arg) {
+                  var child_index, name, parent_id;
+                  name = arg.name, parent_id = arg.parent_id, child_index = arg.child_index;
+                  return Spree.ajax({
+                      type: "POST",
+                      dataType: "json",
+                      url: Spree.routes.property_sub_properties_path,
+                      data: {
+                          sub_property: {
+                              name: name,
+                              parent_id: parent_id,
+                              child_index: child_index
+                          }
+                      },
+                      complete: redraw_tree
+                  });
+              };
+
+              update_sub_property = function(arg) {
+                  var child_index, id, parent_id;
+                  id = arg.id, parent_id = arg.parent_id, child_index = arg.child_index;
+                  return Spree.ajax({
+                      type: "PUT",
+                      dataType: "json",
+                      url: Spree.routes.property_sub_properties_path + "/" + id,
+                      data: {
+                          sub_property: {
+                              parent_id: parent_id,
+                              child_index: child_index
+                          }
+                      },
+                      error: redraw_tree
+                  });
+              };
+
+              delete_sub_property = function(arg) {
+                  var id;
+                  id = arg.id;
+                  return Spree.ajax({
+                      type: "DELETE",
+                      dataType: "json",
+                      url: Spree.routes.property_sub_properties_path + "/" + id,
+                      error: redraw_tree
+                  });
+              };
+
+              draw_tree = function(property) {
+                  var sub_properties_template;
+                  sub_properties_template = HandlebarsTemplates["sub_properties/propertytree"];
+
+                  return $('#property_tree').html(sub_properties_template({
+                      sub_properties: [property.root]
+                  })).find('ul').sortable({
+                      connectWith: '#property_tree ul',
+                      placeholder: 'sortable-placeholder ui-state-highlight',
+                      tolerance: 'pointer',
+                      cursorAt: {
+                          left: 5
+                      }
+                  });
+              };
+
+              redraw_tree = function() {
+                  return get_property().done(draw_tree);
+              };
+
+              resize_placeholder = function(ui) {
+                  var handleHeight;
+                  handleHeight = ui.helper.find('.sortable-handle').outerHeight();
+                  return ui.placeholder.height(handleHeight);
+              };
+
+              restore_sort_targets = function() {
+                  return $('.ui-sortable-over').removeClass('ui-sortable-over');
+              };
+
+              highlight_sort_targets = function(ui) {
+                  restore_sort_targets();
+                  return ui.placeholder.parents('ul').addClass('ui-sortable-over');
+              };
+
+              handle_move = function(el) {
+                  return update_sub_property({
+                      id: el.data('sub-property-id'),
+                      parent_id: el.parent().closest('li').data('sub-property-id'),
+                      child_index: el.index()
+                  });
+              };
+
+              handle_delete = function(e) {
+                  var el;
+                  el = $(e.target).closest('li');
+                  if (confirm(Spree.translations.are_you_sure_delete)) {
+                      delete_sub_property({
+                          id: el.data('sub-property-id')
+                      });
+                      return el.remove();
+                  }
+              };
+
+              handle_add_child = function(e) {
+                  var child_index, el, name, parent_id;
+                  el = $(e.target).closest('li');
+                  parent_id = el.data('sub-property-id');
+                  name = 'New node';
+                  child_index = 0;
+                  return create_sub_property({
+                      name: name,
+                      parent_id: parent_id,
+                      child_index: child_index
+                  });
+              };
+
+              get_create_handler = function(property_id) {
+                  var handle_create;
+                  return handle_create = function(e) {
+                      e.preventDefault();
+                      return get_property().done(function(property) {
+                          var child_index, name, parent_id;
+                          name = 'New node';
+                          parent_id = property.root.id;
+                          child_index = 0;
+                          return create_sub_property({
+                              name: name,
+                              parent_id: parent_id,
+                              child_index: child_index
+                          });
+                      });
+                  };
+              };
+
+              setup_property_tree = function(property_id) {
+                  redraw_tree();
+                  $("#property_tree").on({
+                      sortstart: function(e, ui) {
+                          return resize_placeholder(ui);
+                      },
+                      sortover: function(e, ui) {
+                          return highlight_sort_targets(ui);
+                      },
+                      sortstop: restore_sort_targets,
+                      sortupdate: function(e, ui) {
+                          if (ui.sender == null) {
+                              return handle_move(ui.item);
+                          }
+                      }
+                  }).on('click', '.js-sub-property-delete', handle_delete).on('click', '.js-sub-property-add-child', handle_add_child);
+                  return $('.add-sub-property-button').on('click', get_create_handler(property_id));
+              };
+
+              $(function() {
+                  if ($('#property_tree').length) {
+                      return setup_property_tree($('#property_tree').data("property-id"));
+                  }
+              });
+
+          }).call(this);
+      </script>
+      <div id="property_tree" class="tree" data-property-id="<%= @property.id %>"></div>
+    </div>
 <% end %>

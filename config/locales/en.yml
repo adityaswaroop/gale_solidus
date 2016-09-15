@@ -34,6 +34,7 @@ en:
     edit_property: 'Edit Property'
     back_to_properties_list: 'Back to Properties List'
     add_sub_property: 'Add Sub Property'
+    sub_property_edit: 'Edit Sub Property'
 
     api:
       invalid_property_id: 'Invalid Property ID'

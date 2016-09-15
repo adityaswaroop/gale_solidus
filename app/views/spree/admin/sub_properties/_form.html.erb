@@ -1,0 +1,9 @@
+<div data-hook="admin_inside_taxon_form" class="row">
+  <div class="alpha five columns">
+    <%= f.field_container :name do %>
+      <%= f.label :name, class: 'required' %><br />
+      <%= text_field :sub_property, :name, :class => 'fullwidth' %>
+      <%= error_message_on :sub_property, :name, :class => 'fullwidth title' %>
+    <% end %>
+  </div>
+</div>

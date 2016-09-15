@@ -7,7 +7,7 @@
       <%= button_link_to Spree.t(:back_to_properties_list), spree.admin_properties_path, :id => 'admin_properties_link', :class => 'fa fa-arrow-left' %>
     </li>
     <li>
-      <%= button_link_to Spree.t(:add_sub_property), spree.admin_properties_path, { class: 'add-taxon-button fa fa-plus' } %>
+      <%= button_link_to Spree.t(:add_sub_property), spree.admin_properties_path, { class: 'add-sub-property-button fa fa-plus' } %>
     </li>
 <% end %>
 
@@ -87,7 +87,7 @@
 
               draw_tree = function(property) {
                   var sub_properties_template;
-                  sub_properties_template = HandlebarsTemplates["sub_properties/propertytree"];
+                  sub_properties_template = HandlebarsTemplates["sub_properties/tree"];
 
                   return $('#property_tree').html(sub_properties_template({
                       sub_properties: [property.root]

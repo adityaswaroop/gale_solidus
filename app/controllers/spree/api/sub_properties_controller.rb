@@ -76,7 +76,7 @@ module Spree
       end
 
       def property
-        if params[:category_id].present?
+        if params[:property_id].present?
           @property ||= Spree::Property.accessible_by(current_ability, :read).find(params[:property_id])
         end
       end
@@ -87,7 +87,7 @@ module Spree
 
       def sub_property_params
         if params[:sub_property] && !params[:sub_property].empty?
-          params.require(:sub_property).permit(permitted_sub_property_attributes)
+          params.require(:sub_property).permit([:name, :parent_id, :property_id])
         else
           {}
         end

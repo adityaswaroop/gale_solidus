@@ -3,7 +3,7 @@
 
 <% content_for :page_actions do %>
     <li>
-      <%= button_link_to Spree.t(:back_to_categories_list), spree.admin_taxonomies_path, :class=>'fa fa-arrow-left' %>
+      <%= button_link_to Spree.t(:back_to_categories_list), spree.admin_categories_path, :class=>'fa fa-arrow-left' %>
     </li>
 <% end %>
 
@@ -14,7 +14,7 @@
 
     <div class="form-buttons filter-actions" data-hook="buttons">
       <%= button Spree.t('actions.update') %>
-      <%= button_link_to Spree.t('actions.cancel'), edit_admin_taxonomy_url(@taxonomy) %>
+      <%= button_link_to Spree.t('actions.cancel'), edit_admin_category_url(@taxonomy) %>
     </div>
 <% end %>
 

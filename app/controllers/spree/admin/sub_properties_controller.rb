@@ -15,7 +15,7 @@ module Spree
       end
 
       def create
-        @property = Property.find(params[:taxonomy_id])
+        @property = Property.find(params[:property_id])
         @sub_property = @property.sub_properties.build(params[:sub_property])
         if @sub_property.save
           respond_with(@sub_property) do |format|
@@ -24,7 +24,7 @@ module Spree
         else
           flash[:error] = Spree.t('errors.messages.could_not_create_sub_property')
           respond_with(@sub_property) do |format|
-            format.html { redirect_to @property ? edit_admin_category_url(@property) : admin_categories_url }
+            format.html { redirect_to @property ? edit_admin_property_url(@property) : admin_properties_url }
           end
         end
       end
@@ -35,7 +35,7 @@ module Spree
       end
 
       def update
-        @property = Property.find(params[:taxonomy_id])
+        @property = Property.find(params[:property_id])
         @sub_property = @property.sub_properties.find(params[:id])
         parent_id = params[:sub_property][:parent_id]
         new_position = params[:sub_property][:position]
@@ -57,7 +57,7 @@ module Spree
         end
 
         respond_with(@sub_property) do |format|
-          format.html { redirect_to edit_admin_category_url(@property) }
+          format.html { redirect_to edit_admin_property_url(@property) }
         end
       end
 
@@ -70,7 +70,7 @@ module Spree
       private
 
       def sub_property_params
-        params.require(:sub_property).permit(permitted_sub_property_attributes)
+        params.require(:sub_property).permit([:name, :parent_id, :property_id])
       end
     end
   end

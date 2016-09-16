@@ -22,6 +22,7 @@
 
     <div>
       <script>
+
           Spree.routes.property_path = "<%= spree.api_property_path(@property) %>";
           Spree.routes.property_sub_properties_path = "<%= spree.api_property_sub_properties_path(@property) %>";
           Spree.routes.admin_property_sub_properties_path = "<%= spree.admin_property_sub_properties_path(@property) %>";
@@ -87,7 +88,7 @@
 
               draw_tree = function(property) {
                   var sub_properties_template;
-                  sub_properties_template = HandlebarsTemplates["sub_properties/tree"];
+                  sub_properties_template = HandlebarsTemplates["taxons/tree"];
 
                   return $('#property_tree').html(sub_properties_template({
                       sub_properties: [property.root]
@@ -200,3 +201,65 @@
       <div id="property_tree" class="tree" data-property-id="<%= @property.id %>"></div>
     </div>
 <% end %>
+<style>
+
+    #property_tree {
+        padding: 0 3em;
+    }
+
+    #property_tree, #property_tree ul {
+        list-style: none;
+    }
+
+    #property_tree ul {
+        min-height: 0.5em;
+    }
+
+    #property_tree .ui-sortable {
+        margin-bottom: 0.5em;
+    }
+
+    #property_tree > li > .sortable-handle {
+        text-indent: 2em;
+    }
+
+    #property_tree > li > .sortable-handle * {
+        text-indent: 0;
+    }
+
+    #property_tree > li > .ui-sortable {
+        padding-bottom: 5em;
+    }
+
+    #property_tree .sortable-handle, #property_tree .sortable-placeholder {
+        border-radius: 3px;
+    }
+
+    #property_tree .sortable-handle {
+        background-color: #f3f8fc;
+        border: 1px solid #cee1f4;
+        color: #6788A2;
+        font-weight: 600;
+        padding: 0.5em;
+        cursor: move;
+    }
+
+    #property_tree .sortable-handle i {
+        margin-right: 4px;
+        margin-bottom: 0;
+        margin-left: 6px;
+    }
+
+    #property_tree .sortable-handle .actions a {
+        margin-left: 8px;
+    }
+
+    #property_tree .ui-sortable-over {
+        padding-bottom: 1em;
+    }
+
+    #property_tree .ui-sortable-handle:first-child {
+        margin-top: 1em;
+    }
+</style>
+

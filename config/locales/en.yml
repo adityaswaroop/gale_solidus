@@ -35,12 +35,10 @@ en:
     back_to_properties_list: 'Back to Properties List'
     add_sub_property: 'Add Sub Property'
     sub_property_edit: 'Edit Sub Property'
+    find_a_taxon: 'Find a Catalog'
 
     api:
       invalid_property_id: 'Invalid Property ID'
-
-    translations:
-      find_a_taxon: 'Find a Catalog'
 
     admin:
       tab:
